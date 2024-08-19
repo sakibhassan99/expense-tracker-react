@@ -24,6 +24,7 @@ main {
 }
 
 .expense-table {
+  align-self: self-start;
   width: 100%;
   border-collapse: collapse;
 }

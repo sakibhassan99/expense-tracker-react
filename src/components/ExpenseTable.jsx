@@ -1,17 +1,25 @@
+import { useFilter } from "../hooks/useFilter";
+
 export default function ExpenseTable({ expenses }) {
+  const [filteredData, setQuery] = useFilter(
+    expenses,
+    (expense) => expense.category
+  );
+
+  const total = filteredData.reduce((acc, expense) => acc + expense.amount, 0);
   return (
     <table className="expense-table">
       <thead>
         <tr>
           <th>Title</th>
           <th>
-            <select>
+            <select onChange={(e) => setQuery(e.target.value.toLowerCase())}>
               <option value="">All</option>
-              <option value="grocery">Grocery</option>
-              <option value="clothes">Clothes</option>
-              <option value="bills">Bills</option>
-              <option value="education">Education</option>
-              <option value="medicine">Medicine</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Bills">Bills</option>
+              <option value="Education">Education</option>
+              <option value="Medicine">Medicine</option>
             </select>
           </th>
           <th className="amount-column">
@@ -40,7 +48,7 @@ export default function ExpenseTable({ expenses }) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map(({ id, title, category, amount }) => {
+        {filteredData.map(({ id, title, category, amount }) => {
           return (
             <tr key={id}>
               <td>{title}</td>
@@ -52,7 +60,7 @@ export default function ExpenseTable({ expenses }) {
         <tr>
           <th>Total</th>
           <th></th>
-          <th>৳8100</th>
+          <th>৳{total}</th>
         </tr>
       </tbody>
     </table>

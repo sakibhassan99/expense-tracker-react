@@ -1,3 +1,4 @@
+import ExpenseData from "../ExpenseData";
 import "./App.css";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseTable from "./components/ExpenseTable";
@@ -7,8 +8,8 @@ function App() {
     <main>
       <h1>Track Your Expense</h1>
       <div className="expense-tracker">
-        <ExpenseForm />
-        <ExpenseTable />
+        <ExpenseForm ExpenseData={ExpenseData} />
+        <ExpenseTable ExpenseData={ExpenseData} />
       </div>
     </main>
   );

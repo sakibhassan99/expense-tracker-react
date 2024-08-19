@@ -1,4 +1,4 @@
-export default function ExpenseTable({ ExpenseData }) {
+export default function ExpenseTable({ expenses }) {
   return (
     <table className="expense-table">
       <thead>
@@ -40,7 +40,7 @@ export default function ExpenseTable({ ExpenseData }) {
         </tr>
       </thead>
       <tbody>
-        {ExpenseData.map(({ id, title, category, amount }) => {
+        {expenses.map(({ id, title, category, amount }) => {
           return (
             <tr key={id}>
               <td>{title}</td>

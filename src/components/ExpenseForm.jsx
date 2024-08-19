@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Input from "./Input";
+import Select from "./Select";
 
 export default function ExpenseForm({ expenses, setExpenses }) {
   const [expense, setExpense] = useState({
@@ -58,56 +60,47 @@ export default function ExpenseForm({ expenses, setExpenses }) {
       }}
     >
       <div className="input-container">
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          name="title"
+        <Input
+          label={"Title"}
+          id={"title"}
+          type={"text"}
           value={expense.title}
-          onChange={(e) =>
+          eventHandler={(e) =>
             setExpense((prevStage) => ({ ...prevStage, title: e.target.value }))
           }
+          error={errors.title}
         />
-        <p className="errors">{errors.title}</p>
       </div>
       <div className="input-container">
-        <label htmlFor="category">Category</label>
-        <select
-          id="category"
-          name="category"
-          value={expense.category}
-          onChange={(e) =>
+        <Select
+          label={"Category"}
+          id={"category"}
+          eventHandler={(e) =>
             setExpense((prevStage) => ({
               ...prevStage,
               category: e.target.value,
             }))
           }
-        >
-          <option value="" hidden>
-            Select Category
-          </option>
-          <option value="Grocery">Grocery</option>
-          <option value="Clothes">Clothes</option>
-          <option value="Bills">Bills</option>
-          <option value="Education">Education</option>
-          <option value="Medicine">Medicine</option>
-        </select>
-        <p className="errors">{errors.category}</p>
+          value={expense.category}
+          defaultOption={"Select Category"}
+          options={["Grocery", "Clothes", "Bills", "Education", "Medicine"]}
+          error={errors.category}
+        />
       </div>
       <div className="input-container">
-        <label htmlFor="amount">Amount</label>
-        <input
-          type="number"
-          id="amount"
-          name="amount"
+        <Input
+          label={"Amount"}
+          id={"amount"}
+          type={"number"}
           value={expense.amount}
-          onChange={(e) =>
+          eventHandler={(e) =>
             setExpense((prevStage) => ({
               ...prevStage,
               amount: e.target.value,
             }))
           }
+          error={errors.amount}
         />
-        <p className="errors">{errors.amount}</p>
       </div>
       <button className="add-btn">Add</button>
     </form>

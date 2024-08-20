@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function ExpenseForm({
   setExpenses,
@@ -81,7 +82,10 @@ export default function ExpenseForm({
           type={"text"}
           value={expense.title}
           eventHandler={(e) =>
-            setExpense((prevStage) => ({ ...prevStage, title: e.target.value }))
+            setExpense((prevStage) => ({
+              ...prevStage,
+              title: e.target.value,
+            }))
           }
           error={errors.title}
         />
